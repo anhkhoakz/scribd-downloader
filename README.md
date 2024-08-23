@@ -24,7 +24,9 @@ playwright install
 
 ## Running
 
-Watch the [demonstration video](https://youtu.be/sbMb_EOFNTA).
+Watch the demonstration video:
+
+[![Watch the video](https://i.ytimg.com/vi/sbMb_EOFNTA/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYACzAWKAgwIABABGGUgZShlMA8=&rs=AOn4CLDX4KgEQcWknMS3Dgf8735uE2GUEQ)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 1. Run the script:
 

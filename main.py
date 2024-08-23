@@ -9,13 +9,13 @@ from PyPDF2 import PdfMerger
 ZOOM = 0.625
 
 
-def create_cache_dir(book_filename):
+def create_cache_dir(book_filename: str) -> str:
     cache_dir = f"{os.getcwd()}/{book_filename}"
     os.makedirs(cache_dir, exist_ok=True)
     return cache_dir
 
 
-def login_and_get_session(playwright, base_url):
+def login_and_get_session(playwright: any, base_url: str) -> None:
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context(
         storage_state="session.json" if "session.json" in os.listdir(".") else None
@@ -37,7 +37,7 @@ def login_and_get_session(playwright, base_url):
     browser.close()
 
 
-def setup_browser_context(playwright):
+def setup_browser_context(playwright: any) -> tuple:
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context(
         storage_state="session.json",
@@ -50,8 +50,13 @@ def setup_browser_context(playwright):
 
 
 def download_chapter_pages(
-    page, render_page, cache_dir, chapter_no, num_of_chapters, font_style
-):
+    page,
+    render_page,
+    cache_dir: str,
+    chapter_no: int,
+    num_of_chapters: int,
+    font_style: str,
+) -> None:
     page.locator('div.vertical_page[data-page="0"]').wait_for()
     chapter_pages = page.locator("div.vertical_page")
     number_of_chapter_pages = chapter_pages.count()
@@ -81,7 +86,9 @@ def download_chapter_pages(
     merger.close()
 
 
-def merge_chapters_to_pdf(cache_dir, book_filename, num_of_chapters):
+def merge_chapters_to_pdf(
+    cache_dir: str, book_filename: str, num_of_chapters: int
+) -> None:
     print("Merging PDF pages...")
     merger = PdfMerger()
     for chapter_no in range(1, num_of_chapters + 1):
@@ -90,7 +97,7 @@ def merge_chapters_to_pdf(cache_dir, book_filename, num_of_chapters):
     merger.close()
 
 
-def main():
+def main() -> None:
     if len(sys.argv) < 2:
         print(
             "Error: No URL provided. Please provide a book URL as a command-line argument."
